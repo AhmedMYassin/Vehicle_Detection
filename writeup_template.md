@@ -13,7 +13,7 @@ To detect vehicles in images, I needed to perform a Histogram of Oriented Gradie
 [image7]: ./examples/output_bboxes.png
 [video1]: ./project_video.mp4
 
----
+
 ### Histogram of Oriented Gradients (HOG)
 
 In IPython notebook, I start with getting my training data ""Kitti dataset for vehicle and non-vehicle images".  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
@@ -31,10 +31,10 @@ I used the final parameters to extract the features of the training data to use 
 
 I trained a linear SVM using 'grid_search.GridSearchCV()' and the final calssification paramters were 'kernel = rbf' and 'C = 1.0'. The classifier accuracy was 0.995 over the testing data .. maybe this accuracy isn't reliable as the difference between the training and testing data isn't big enough to trust this accuracy.
 
----
+
 ### Sliding Window Search
 
-I used sliding windows of size multiple of 32x32 to cover the range from 64*64 to 256*256 using 25% of overlapping.
+I used sliding windows of size multiple of `32x32` to cover the range from `64x64` to `256x256` using 25% of overlapping.
 
 I performed the sliding window search on test images to create different windows, then I extracted HOG features from these windows as mentioned above and apply the classifier on them. Test images were normalized.
 
@@ -42,27 +42,26 @@ To avoid false positives, I used heatmap to filter windows based on threshold = 
 
 ![alt text][image4]
 
----
+
 ### Video Implementation
 
-Here's a [link to my video result](./project_video.mp4)
+[Here](./project_video.mp4) you can find the output video.
 
 To filter the flase positives, I used the positive detections in batches of concecutive frames to create a heatmap which was thresholded to get rid of all false positives.
 
 Here's an example result showing the heatmap from a series of frames of video.
 
-### Here are six frames and their corresponding heatmaps:
+Here are six frames and their corresponding heatmaps:
 
 ![alt text][image5]
 
-### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
+Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
 ![alt text][image6]
 
-### Here the resulting bounding boxes are drawn onto the last frame in the series:
+Here the resulting bounding boxes are drawn onto the last frame in the series:
 ![alt text][image7]
 
----
 
-###Discussion
+### Discussion
 
-#### The pipeline in video implementation isn't enough to avoid whobly boxes. Using batches of consecutive frames made the result much better but it's not the best way to do that. Maybe a specific tracking algorithm is needed for that.
+The pipeline in video implementation isn't enough to avoid whobly boxes. Using batches of consecutive frames made the result much better but it's not the best way to do that. Maybe a specific tracking algorithm is needed for that.
