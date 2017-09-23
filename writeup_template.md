@@ -4,13 +4,18 @@ In Vehicle Detection Project, it's expected to be able to detect vehicle in imag
 To detect vehicles in images, I needed to perform a Histogram of Oriented Gradients (HOG) feature extraction on a labeled training set of images and train a Linear support vector machine classifier
 
 [//]: # (Image References)
-[image1]: ./examples/car_not_car.png
-[image2]: ./examples/HOG_example.jpg
-[image3]: ./examples/sliding_windows.jpg
-[image4]: ./examples/sliding_window.jpg
-[image5]: ./examples/bboxes_and_heat.png
-[image6]: ./examples/labels_map.png
-[image7]: ./examples/output_bboxes.png
+[image1]: ./output_images/Vehicle_and_Non_Vehicle.png
+[image2]: ./output_images/HOG0.png
+[image4]: ./output_images/HOG1.png
+[image5]: ./output_images/HOG2.png
+[image6]: ./output_images/Test_Sliding_Windows.png
+[image7]: ./output_images/Video_Test_Heat_map.png
+[image8]: ./output_images/Video_Test_Heat_map1.png
+[image9]: ./output_images/Video_Test_Heat_map2.png
+[image10]: ./output_images/Video_Test_Heat_map3.png
+[image11]: ./output_images/Video_Test_Heat_map4.png
+[image12]: ./output_images/Video_Test_Heat_map5.png
+[image13]: ./output_images/Video_Test_Output.png
 [video1]: ./project_video.mp4
 
 
@@ -24,8 +29,9 @@ I had explored different color spaces and different `skimage.hog()` parameters (
 
 Here is an example using the `YCrCb` color space and HOG parameters of `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
 
-
 ![alt text][image2]
+![alt text][image4]
+![alt text][image5]
 
 I had also computed the spatial features of size `(32,32)` and the color histogram features for `32` bins.
 
@@ -42,7 +48,7 @@ I performed the sliding window search on test images to create different windows
 
 To avoid false positives, I used heatmap to filter windows based on threshold = 1. Here you can check the test images after removing the false positives.
 
-![alt text][image4]
+![alt text][image6]
 
 
 ### Video Implementation
@@ -53,16 +59,17 @@ To filter the flase positives, I used the positive detections in batches of cons
 
 Here's an example result showing the heatmap from a series of frames of video.
 
-Here are six frames and their corresponding heatmaps:
+Here are 5 frames and their corresponding heatmaps:
 
-![alt text][image5]
-
-Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
-![alt text][image6]
-
-Here the resulting bounding boxes are drawn onto the last frame in the series:
 ![alt text][image7]
+![alt text][image8]
+![alt text][image9]
+![alt text][image10]
+![alt text][image11]
+![alt text][image12]
 
+Here is the resulting bounding boxes in last frame and the output of`scipy.ndimage.measurements.label()` on the integrated heatmap from all 5 frames:
+![alt text][image13]
 
 ### Discussion
 
