@@ -3,12 +3,6 @@
 In Vehicle Detection Project, it's expected to be able to detect vehicle in images and apply this detection algorithm to videos to track vehicles.
 To detect vehicles in images, I needed to perform a Histogram of Oriented Gradients (HOG) feature extraction on a labeled training set of images and train a Linear support vector machine classifier
 
-* Optionally, you can also apply a color transform and append binned color features, as well as histograms of color, to your HOG feature vector. 
-* Note: for those first two steps don't forget to normalize your features and randomize a selection for training and testing.
-* Implement a sliding-window technique and use your trained classifier to search for vehicles in images.
-* Run your pipeline on a video stream (start with the test_video.mp4 and later implement on full project_video.mp4) and create a heat map of recurring detections frame by frame to reject outliers and follow detected vehicles.
-* Estimate a bounding box for vehicles detected.
-
 [//]: # (Image References)
 [image1]: ./examples/car_not_car.png
 [image2]: ./examples/HOG_example.jpg
@@ -42,7 +36,7 @@ Here is an example using the `YCrCb` color space and HOG parameters of `orientat
 
 #### 2. I performed the sliding window search on test images to create different windows, then I extracted HOG features from these windows as mentioned above and apply the classifier on them. Test images were normalized.
 
-#### 3. To avoid false positive, I used heatmap to 
+#### 3. To avoid false positives, I used heatmap to filter windows based on threshold = 1. Here you can check the test images after removing the false positives.
 
 ![alt text][image4]
 ---
@@ -52,7 +46,7 @@ Here is an example using the `YCrCb` color space and HOG parameters of `orientat
 ####1. Here's a [link to my video result](./project_video.mp4)
 
 
-####2. To filter the flase positives, I used the positive detections in batches of concecutive frames to create a heatmap which was thresholded to get rid of all false positives.  
+####2. To filter the flase positives, I used the positive detections in batches of concecutive frames to create a heatmap which was thresholded to get rid of all false positives.
 
 Here's an example result showing the heatmap from a series of frames of video.
 
@@ -66,11 +60,8 @@ Here's an example result showing the heatmap from a series of frames of video.
 ### Here the resulting bounding boxes are drawn onto the last frame in the series:
 ![alt text][image7]
 
-
-
 ---
 
 ###Discussion
 
-####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
-The proposed pipeline didn't use the color histogram as it caused many false positives, maybe my training data isn't enough or that
+#### The pipeline in video implementation isn't enough to avoid whobly boxes. Using batches of consecutive frames made the result much better but it's not the best way to do that. Maybe a specific tracking algorithm is needed for that.
