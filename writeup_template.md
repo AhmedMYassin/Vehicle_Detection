@@ -69,6 +69,7 @@ Here are 5 frames and their corresponding heatmaps:
 ![alt text][image12]
 
 Here is the resulting bounding boxes in last frame and the output of`scipy.ndimage.measurements.label()` on the integrated heatmap from all 5 frames:
+
 ![alt text][image13]
 
 ### Discussion
