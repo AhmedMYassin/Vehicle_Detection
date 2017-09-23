@@ -19,43 +19,30 @@ To detect vehicles in images, I needed to perform a Histogram of Oriented Gradie
 [image7]: ./examples/output_bboxes.png
 [video1]: ./project_video.mp4
 
-## [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
-###Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
+### Histogram of Oriented Gradients (HOG)
 
-You're reading it!
-
-###Histogram of Oriented Gradients (HOG)
-
-####1. In IPython notebook, I start with getting my training data ""Kitti dataset for vehicle and non-vehicle images".  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
+#### 1. In IPython notebook, I start with getting my training data ""Kitti dataset for vehicle and non-vehicle images".  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
 
 ![alt text][image1]
 
-###2. 
-I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
+#### 2. I had explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I used the random images to get a feel for what the `skimage.hog()` output looks like. 
 
 Here is an example using the `YCrCb` color space and HOG parameters of `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
 
 
 ![alt text][image2]
 
-####2. After I tried different parameters for the HOG feature extraction I used these parameters for processing the data:
+#### 3. I used the final parameters to extract the features of the training data to use them as input for the classifier. I made sure that the images are normalized.
 
+#### 4. I trained a linear SVM using 'grid_search.GridSearchCV()' and the final calssification paramters were 'kernel = rbf' and 'C = 1.0'. The classifier accuracy was 0.995 over the testing data .. maybe this accuracy isn't reliable as the difference between the training and testing data isn't big enough to trust this accuracy.
 
-####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
+### Sliding Window Search
 
-I trained a linear SVM using...
+#### 1. I used sliding windows of size multiple of 32x32 to cover the range from 64*64 to 256*256 using 25% of overlapping.
 
-###Sliding Window Search
+#### 2. I performed the sliding window search on test images to create different windows, then I extracted HOG features from these windows as mentioned above and apply the classifier on them. Test images were normalized.
 
-####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
-
-I decided to search random window positions at random scales all over the image and came up with this (ok just kidding I didn't actually ;):
-
-![alt text][image3]
-
-####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
-
-Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
+#### 3. To avoid false positive, I used heatmap to 
 
 ![alt text][image4]
 ---
