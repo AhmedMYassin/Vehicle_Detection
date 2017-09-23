@@ -35,7 +35,7 @@ Here is an example using the `YCrCb` color space and HOG parameters of `orientat
 
 I had also computed the spatial features of size `(32,32)` and the color histogram features for `32` bins.
 
-I used the final parameters of HOG to extract the HOG features of the training data to use them beside the color histogram features and the spatial features as input to the classifier. I made sure that the images are normalized `(x - 0.5)`.
+I used the final parameters of HOG to extract the HOG features of the training data to use them beside the color histogram features and the spatial features as input to the classifier. I made sure that the images are normalized.
 
 I trained a linear SVM using 'grid_search.GridSearchCV()' and the final calssification paramters were `kernel = rbf` and `C = 1.0`. The classifier accuracy was 0.995 over the testing data .. maybe this accuracy isn't reliable as the difference between the training and testing data isn't big enough to trust this accuracy.
 
