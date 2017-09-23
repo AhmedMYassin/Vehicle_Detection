@@ -29,7 +29,7 @@ Here is an example using the `YCrCb` color space and HOG parameters of `orientat
 
 I used the final parameters to extract the features of the training data to use them as input for the classifier. I made sure that the images are normalized.
 
-I trained a linear SVM using 'grid_search.GridSearchCV()' and the final calssification paramters were 'kernel = rbf' and 'C = 1.0'. The classifier accuracy was 0.995 over the testing data .. maybe this accuracy isn't reliable as the difference between the training and testing data isn't big enough to trust this accuracy.
+I trained a linear SVM using 'grid_search.GridSearchCV()' and the final calssification paramters were `kernel = rbf` and `C = 1.0`. The classifier accuracy was 0.995 over the testing data .. maybe this accuracy isn't reliable as the difference between the training and testing data isn't big enough to trust this accuracy.
 
 
 ### Sliding Window Search
