@@ -27,7 +27,9 @@ Here is an example using the `YCrCb` color space and HOG parameters of `orientat
 
 ![alt text][image2]
 
-I used the final parameters to extract the features of the training data to use them as input for the classifier. I made sure that the images are normalized.
+I had also computed the spatial features of size `(32,32)` and the color histogram features for `32` bins.
+
+I used the final parameters of HOG to extract the HOG features of the training data to use them beside the color histogram features and the spatial features as input to the classifier. I made sure that the images are normalized `(x - 0.5)`.
 
 I trained a linear SVM using 'grid_search.GridSearchCV()' and the final calssification paramters were `kernel = rbf` and `C = 1.0`. The classifier accuracy was 0.995 over the testing data .. maybe this accuracy isn't reliable as the difference between the training and testing data isn't big enough to trust this accuracy.
 
@@ -47,7 +49,7 @@ To avoid false positives, I used heatmap to filter windows based on threshold = 
 
 [Here](./project_video.mp4) you can find the output video.
 
-To filter the flase positives, I used the positive detections in batches of concecutive frames to create a heatmap which was thresholded to get rid of all false positives.
+To filter the flase positives, I used the positive detections in batches of consecutive frames to create a heatmap which was thresholded to get rid of all false positives.
 
 Here's an example result showing the heatmap from a series of frames of video.
 
